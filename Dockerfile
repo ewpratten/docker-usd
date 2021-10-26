@@ -1,4 +1,4 @@
-FROM nvidia/opengl:base
+FROM nvidia/opengl:base-ubuntu20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Select needed PPAs
@@ -18,19 +18,17 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
 # Install dependencies
 RUN apt-get install -y curl
 RUN apt-get install -y p7zip-full
-RUN apt-get install -y libgl1-mesa-glx
-RUN apt-get install -y qt5-default
-RUN apt-get install -y libpyside2-dev  python3-pyside2.qtcore
-
-# RUN apt-get install -y libglvnd0 libgl1 libglx0 libegl1
-# RUN apt-get install -y libglvnd-dev libgl1-mesa-dev libegl1-mesa-dev
-# RUN apt-get install -y libxext6 libx11-6
 
 # Pull in Nvidia's build of USD
 RUN mkdir -p /usr/local/nvidia/usd 
 RUN curl -L https://developer.nvidia.com/usd-21-05-binary-linux-python-3.6 -o /tmp/usd.7z
 RUN 7z x /tmp/usd.7z -o/usr/local/nvidia/usd -y
 RUN rm /tmp/usd.7z
+
+# Install graphics libraries
+RUN apt-get install -y libgl1-mesa-glx mesa-utils
+RUN apt-get install -y qt5-default
+RUN apt-get install -y libpyside2-dev  python3-pyside2.qtcore
 
 # Configure the environment
 ENV USDROOT /usr/local/nvidia/usd
