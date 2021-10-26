@@ -1,4 +1,6 @@
 # Universal Scene Description in Docker
+![Docker Pulls](https://img.shields.io/docker/pulls/ewpratten/usd)
+![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/ewpratten/usd)
 
 This project aims to build an easy to use Docker container that contains everything needed for me to experiment with Pixar's [Universal Scene Description (USD)](http://openusd.org/) in a safe and reproducible environment.
 
