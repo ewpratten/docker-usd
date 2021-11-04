@@ -35,3 +35,19 @@ nvidia-docker run -it \
 Aside from a few modifications to the environment and package versions, this is essentially just a regular Ubuntu 20.04 Docker base image, and can be used as such.
 
 To execute your own code in the container, either extend the image with our own `Dockerfile`, or mount your application as a volume to `ewpratten/usd`. Keep in mind, when doing either, that the USD Docker container uses a custom [`entrypoint.sh`](./entrypoint.sh) script, which does a bit of environment setup. Make sure to initialize the environment yourself if overriding the container entrypoint.
+
+## VSCode Devcontainers
+
+In order to get autocomplete for the `pxr` Python library in VSCode without building USD on my development machine, I have built a custom [devcontainer](https://code.visualstudio.com/docs/remote/containers) for USD development. Using it in your editor is as simple as creating a file at `.devcontainer/devcontainer.json` with the following contents:
+
+```json
+{
+    "name": "USD Development",
+    "image": "ewpratten/usd-devcontainer:latest",
+    "extensions": [
+        "ms-python.vscode-pylance",
+        "ms-python.python"
+    ],
+    "remoteUser": "vscode"
+}
+```
